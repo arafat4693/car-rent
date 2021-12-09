@@ -4,7 +4,7 @@
     box-sizing: border-box;
     transition: 0.2s linear;
     text-decoration: none;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
     border: none;
     outline: none;
     font-family: "Poppins", sans-serif;
@@ -45,6 +45,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 form {
@@ -64,6 +65,7 @@ form .box {
     border: 0.1rem solid #666;
     margin-bottom: 1rem;
     border-radius: 0.5rem;
+    text-transform: none;
   }
   
 form .box:focus {

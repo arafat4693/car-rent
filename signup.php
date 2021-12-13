@@ -4,6 +4,15 @@
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         session_start();
         include "_connect.php";
+
+        $username = $_POST['username'];
+        $addres = $_POST['addres'];
+        $postaddres = $_POST['post-addres'];
+        $telefon = $_POST['telefon'];
+        $mobiltelefon = $_POST['mobil-telefon'];
+        $email = $_POST['email'];
+        $pass = $_POST['password'];
+
         $_SESSION['username'] = $_POST['username'];
         $_SESSION['addres'] = $_POST['addres'];
         $_SESSION['postaddres'] = $_POST['post-addres'];
@@ -12,22 +21,12 @@
         $_SESSION['email'] = $_POST['email'];
         $_SESSION['pass'] = $_POST['password'];
 
-        $username = $_SESSION['username'];
-        $addres = $_SESSION['addres'];
-        $postaddres = $_SESSION['postaddres'];
-        $telefon = $_SESSION['telefon'];
-        $mobiltelefon = $_SESSION['mobiltelefon'];
-        $email = $_SESSION['email'];
-        $pass = $_SESSION['pass'];
-
         if(isset($username) && isset($email) && isset($password)){
             // $hash = password_hash($password, PASSWORD_DEFAULT);
             $sql = "INSERT INTO `kund`(`KundNamn`, `Adress`, `Postadress`, `Tel`, `MobilTel`, `Epost`, `Password`) VALUES ('$username','$addres','$postaddres','$telefon','$mobiltelefon','$email','$pass')";
             $result = mysqli_query($conn, $sql);
             if($result){
-                $row = mysqli_fetch_assoc($result);
-                $_SESSION['id'] = $row['KundId'];
-                header('location: login.php');
+                header("location: profile.php");
             }
         }
     }
@@ -39,7 +38,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <title>sign up</title>
     <link rel="stylesheet" href="register.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">

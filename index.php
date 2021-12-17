@@ -19,7 +19,7 @@
         rented successfullly
     </div>
     <header>
-        <a href="car.html" class="logo">LOGO<span>.</span></a>
+        <a href="index.php" class="logo">LOGO<span>.</span></a>
         <nav class="navbar">
             <a href="#home" class="active">home</a>
             <a href="#service">service</a>

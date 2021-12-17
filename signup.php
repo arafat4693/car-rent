@@ -4,7 +4,7 @@
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         session_start();
         include "_connect.php";
-
+        
         $username = $_POST['username'];
         $addres = $_POST['addres'];
         $postaddres = $_POST['post-addres'];

@@ -86,3 +86,13 @@ p a {
     opacity: 0.8;
     cursor: pointer;
 }
+
+.userId{
+    padding: 1.5rem 0;
+    text-align: left;
+    background-color: black;
+}
+
+/* .userId span{
+    color: #ff0000;
+} */

@@ -500,12 +500,6 @@ header .menu {
 }
 /* history style end*/
 
-.userId {
-  padding: 1.5rem 0;
-  text-align: center;
-  background-color: red;
-}
-
 /* media queries */
 @media (max-width: 1800px) {
   .extra {

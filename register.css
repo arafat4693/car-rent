@@ -87,8 +87,27 @@ p a {
     cursor: pointer;
 }
 
-.userId {
+.yourId{
     padding: 1.5rem 0;
-    text-align: left;
-    background-color: red;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.yourId .message{
+    color: #ff0000;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.userId {
+    color: #3a3a3a;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.userId span{
+    color: #ff0000;
+    font-weight: 700;
+    font-size: 1.7rem;
 }

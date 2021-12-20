@@ -87,12 +87,8 @@ p a {
     cursor: pointer;
 }
 
-.userId{
+.userId {
     padding: 1.5rem 0;
     text-align: left;
-    background-color: black;
+    background-color: red;
 }
-
-/* .userId span{
-    color: #ff0000;
-} */

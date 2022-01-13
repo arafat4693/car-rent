@@ -3,27 +3,22 @@
     $showError = false;
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         include "_connect.php";
-        $username = $_POST['username'];
+        $userId = $_POST['userId'];
         $password = $_POST['password'];
         
-        $sql = "SELECT * FROM users WHERE username='$username';";
+        $sql = "SELECT * FROM kund WHERE KundId='$userId'";
         $result = mysqli_query($conn, $sql);
-        $num = mysqli_num_rows($result);
-        if($num == 1){
-            while($row = mysqli_fetch_assoc($result)){
-                if(password_verify($password, $row['password'])){
-                    $login = true;
-                    session_start();
-                    $_SESSION['loggedin'] = true;
-                    $_SESSION['username'] = $username;
-                    header("location: welcome.php");
-                }else{
-                    $showError = "Invalid credentials";
-                }
+        // echo $password;
+        while($row = mysqli_fetch_assoc($result)){
+            if(password_verify($password, $row['Password'])){
+                $login = true;
+                session_start();
+                $_SESSION['loggedin'] = true;
+                $_SESSION['userId'] = $userId;
+                header("location: index.php");
+            }else{
+                $showError = "Invalid credentials";
             }
-        }
-        else{
-            $showError = "Invalid credentials";
         }
     }
 ?>
@@ -39,10 +34,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <form>
+    <form method="post" action="login.php">
         <h1 class="heading">Sign <span>In</span></h1>
-        <input type="email" placeholder="email" class="box">
-        <input type="password" placeholder="password" class="box">
+        <input name="userId" type="number" placeholder="user id" class="box">
+        <input name="password" type="password" placeholder="password" class="box">
         <input type="submit" class="btn" value="Sign In">
         <p>Don't have an account? <a href="signup.php">Sign Up</a></p>
     </form>

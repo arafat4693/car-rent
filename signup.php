@@ -11,7 +11,7 @@
         $telefon = $_POST['telefon'];
         $mobiltelefon = $_POST['mobil-telefon'];
         $email = $_POST['email'];
-        $pass = $_POST['password'];
+        $password = $_POST['password'];
 
         $_SESSION['username'] = $_POST['username'];
         $_SESSION['addres'] = $_POST['addres'];
@@ -19,11 +19,12 @@
         $_SESSION['telefon'] = $_POST['telefon'];
         $_SESSION['mobiltelefon'] = $_POST['mobil-telefon'];
         $_SESSION['email'] = $_POST['email'];
-        $_SESSION['pass'] = $_POST['password'];
+        // $_SESSION['pass'] = $_POST['password'];
 
         if(isset($username) && isset($email) && isset($password)){
-            // $hash = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO `kund`(`KundNamn`, `Adress`, `Postadress`, `Tel`, `MobilTel`, `Epost`, `Password`) VALUES ('$username','$addres','$postaddres','$telefon','$mobiltelefon','$email','$pass')";
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+            $_SESSION['pass'] = $hash;
+            $sql = "INSERT INTO `kund`(`KundNamn`, `Adress`, `Postadress`, `Tel`, `MobilTel`, `Epost`, `Password`) VALUES ('$username','$addres','$postaddres','$telefon','$mobiltelefon','$email','$hash')";
             $result = mysqli_query($conn, $sql);
             if($result){
                 header("location: profile.php");

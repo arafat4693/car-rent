@@ -19,11 +19,11 @@
         $_SESSION['telefon'] = $_POST['telefon'];
         $_SESSION['mobiltelefon'] = $_POST['mobil-telefon'];
         $_SESSION['email'] = $_POST['email'];
-        // $_SESSION['pass'] = $_POST['password'];
+        $_SESSION['pass'] = $_POST['password'];
 
         if(isset($username) && isset($email) && isset($password)){
             $hash = password_hash($password, PASSWORD_DEFAULT);
-            $_SESSION['pass'] = $hash;
+            $_SESSION['Hashpass'] = $hash;
             $sql = "INSERT INTO `kund`(`KundNamn`, `Adress`, `Postadress`, `Tel`, `MobilTel`, `Epost`, `Password`) VALUES ('$username','$addres','$postaddres','$telefon','$mobiltelefon','$email','$hash')";
             $result = mysqli_query($conn, $sql);
             if($result){

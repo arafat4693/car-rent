@@ -61,11 +61,6 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* position: fixed;
-  top: 0;
-  left: 0;
-  right: 0; */
-  /* box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1); */
   z-index: 1000;
 }
 
@@ -106,13 +101,8 @@ header .navbar a:hover {
   color: #ff0000;
 }
 
-header .registration .btn-2 {
-  display: inline-block;
-  color: #000;
-  opacity: 0.8;
-  font-size: 1.5rem;
-  padding: 0.5rem 2rem;
-  cursor: pointer;
+header .registration .signup_btn {
+  margin-right: 1rem;
 }
 
 header .registration .icon {

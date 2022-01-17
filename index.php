@@ -1,5 +1,14 @@
 <?php
+    session_start();
     include "_connect.php";
+    if($_SESSION['loggedin'] != true){
+        header("location: login.php");
+    }
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_SESSION['loggedin'] = false;
+        header("location: login.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,12 +36,11 @@
             <a href="#brands">Brands</a>
             <a href="#contact">contact</a>
         </nav>
-        <div class="registration">
-            <a href="#" class="btn signup_btn">sign up</a>
-            <a href="#" class="btn-2 signin_btn">sign in</a>
+        <form class="registration" method="post" action="index.php">
+            <input type="submit" value="sign out" class="btn signup_btn"/>
             <div class="menu fas fa-bars"></div>
             <a href="history.html" class="icon"><i class="fas fa-history"></i></a>
-        </div>
+        </form>
     </header>
     <!-- header section ends -->
 

@@ -19,7 +19,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $new_telefon = $_SESSION['telefon'] = $_POST['telefon'];
     $new_mobiltelefon = $_SESSION['mobiltelefon'] = $_POST['mobil-telefon'];
     $new_email = $_SESSION['email'] = $_POST['email'];
-    $new_pass = $_SESSION['pass'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $new_pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $_SESSION['pass'] = $_POST['password'];
+    $_SESSION['Hashpass'] = $new_pass;
 
     $updateSql = "UPDATE `kund` SET `KundNamn`='$new_username',`Adress`='$new_addres',`Postadress`='$new_postaddres',`Tel`='$new_telefon',`MobilTel`='$new_mobiltelefon',`Epost`='$new_email',`Password`='$new_pass' WHERE KundId=".$_SESSION['KundId'];
     $updateResult = mysqli_query($conn, $updateSql);
@@ -27,7 +29,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $update = true;
     }
 }else{
-    $sql = "SELECT `KundId`, `KundNamn`, `Adress`, `Postadress`, `Tel`, `MobilTel`, `Epost`, `Password` FROM `kund` WHERE '$username' = `KundNamn` AND '$addres' = `Adress` AND '$postaddres' = `Postadress` AND '$telefon' = `Tel` AND '$mobiltelefon' = `MobilTel` AND '$email' = `Epost` AND '$pass' = `Password`";
+    $hashedPass = $_SESSION['Hashpass'];
+    $sql = "SELECT `KundId`, `KundNamn`, `Adress`, `Postadress`, `Tel`, `MobilTel`, `Epost`, `Password` FROM `kund` WHERE '$username' = `KundNamn` AND '$addres' = `Adress` AND '$postaddres' = `Postadress` AND '$telefon' = `Tel` AND '$mobiltelefon' = `MobilTel` AND '$email' = `Epost` AND '$hashedPass' = `Password`";
     $result = mysqli_query($conn, $sql);
     if($result){
         $row = mysqli_fetch_assoc($result);

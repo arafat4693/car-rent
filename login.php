@@ -8,7 +8,6 @@
         
         $sql = "SELECT * FROM kund WHERE KundId='$userId'";
         $result = mysqli_query($conn, $sql);
-        // echo $password;
         while($row = mysqli_fetch_assoc($result)){
             if(password_verify($password, $row['Password'])){
                 $login = true;

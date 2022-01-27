@@ -6,8 +6,11 @@
     }
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $_SESSION['loggedin'] = false;
-        header("location: login.php");
+        $signout = $_POST['signout'];
+        if($signout){
+            $_SESSION['loggedin'] = false;
+            header("location: login.php");
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -37,9 +40,9 @@
             <a href="#contact">contact</a>
         </nav>
         <form class="registration" method="post" action="index.php">
-            <input type="submit" value="sign out" class="btn signup_btn"/>
+            <input type="submit" value="sign out" class="btn signup_btn" name="signout"/>
             <div class="menu fas fa-bars"></div>
-            <a href="history.html" class="icon"><i class="fas fa-history"></i></a>
+            <a href="history.php" class="icon"><i class="fas fa-history"></i></a>
         </form>
     </header>
     <!-- header section ends -->
@@ -59,7 +62,7 @@
         <div class="image">
             <img src="images/car.png" alt="">
         </div>
-        <form class="search">
+        <form class="search" method="get" action="available.php">
             <div class="search-icon">
                 <i class="fas fa-search-plus"></i>
                 <select name="location">
@@ -69,13 +72,13 @@
             </div>
             <div class="from">
                 <span>from: </span>
-                <input type="date">
+                <input type="date" name="in">
             </div>
             <div class="to">
                 <span>to: </span>
-                <input type="date">
+                <input type="date" name="out">
             </div>
-            <input type="submit" class="btn submitBtn" value="search">
+            <input type="submit" class="btn submitBtn" value="search" name="search">
         </form>
     </section>
     <!-- home section ends -->

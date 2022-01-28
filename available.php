@@ -1,8 +1,16 @@
 <?php
     if($_SERVER['REQUEST_METHOD'] == 'GET'){
+        include "_connect.php";
         $in = $_GET['in'];
         $out = $_GET['out'];
-        echo $in;
+        $bil = "SELECT `Regnr` FROM `bil`";
+        $hyr = "SELECT `Regnr` FROM `hyr` WHERE `Regnr` BETWEEN '$out' AND '$in'";
+        $resultHyr = mysqli_query($conn, $hyr);
+        // while ($row = mysqli_fetch_assoc($result)) {
+        //     echo $row['columnName']; 
+        //   }
+        $row = mysqli_num_rows($resultHyr);
+        print_r($row);
     }
 ?>
 <!DOCTYPE html>

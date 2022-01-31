@@ -3,14 +3,23 @@
         include "_connect.php";
         $in = $_GET['in'];
         $out = $_GET['out'];
+        $rentedCars = array();
+        $availableCars = array();
         $bil = "SELECT `Regnr` FROM `bil`";
-        $hyr = "SELECT `Regnr` FROM `hyr` WHERE `Regnr` BETWEEN '$out' AND '$in'";
+        $hyr = "SELECT `Regnr`,`Indatum`,`Utdatum` FROM `hyr` WHERE Indatum AND Utdatum BETWEEN '$out' AND '$in'";
         $resultHyr = mysqli_query($conn, $hyr);
-        // while ($row = mysqli_fetch_assoc($result)) {
-        //     echo $row['columnName']; 
-        //   }
-        $row = mysqli_num_rows($resultHyr);
-        print_r($row);
+        $resultBil = mysqli_query($conn, $bil);
+        while ($row = mysqli_fetch_assoc($resultHyr)) {
+            $rentedCars[] = $row['Regnr'];
+        }
+        while ($row2 = mysqli_fetch_assoc($resultBil)) {
+            if(!in_array($row2['Regnr'], $rentedCars)){
+                $availableCars[] = $row2['Regnr'];
+            }
+        }
+        print_r($availableCars);
+        echo "<br>";
+        print_r($rentedCars);
     }
 ?>
 <!DOCTYPE html>
@@ -36,5 +45,14 @@
     </header>
     <!-- header section ends -->
     <h1 class="heading history">available <span>cars</span> </h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Regnr</th>
+                <th>Model</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
 </body>
 </html>

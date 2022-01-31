@@ -72,11 +72,11 @@
             </div>
             <div class="from">
                 <span>from: </span>
-                <input type="date" name="in">
+                <input type="date" name="out">
             </div>
             <div class="to">
                 <span>to: </span>
-                <input type="date" name="out">
+                <input type="date" name="in">
             </div>
             <input type="submit" class="btn submitBtn" value="search" name="search">
         </form>

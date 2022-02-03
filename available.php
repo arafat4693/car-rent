@@ -3,23 +3,14 @@
         include "_connect.php";
         $in = $_GET['in'];
         $out = $_GET['out'];
-        $rentedCars = array();
         $availableCars = array();
-        $bil = "SELECT `Regnr` FROM `bil`";
-        $hyr = "SELECT `Regnr`,`Indatum`,`Utdatum` FROM `hyr` WHERE Indatum AND Utdatum BETWEEN '$out' AND '$in'";
-        $resultHyr = mysqli_query($conn, $hyr);
+        $bil = "SELECT * FROM `bil` WHERE `Regnr` not in (SELECT `Regnr` FROM `hyr` WHERE Indatum AND Utdatum BETWEEN '$out' AND '$in' UNION SELECT `Regnr` FROM `hyr` WHERE Indatum > '$in' AND Utdatum < '$out')";
         $resultBil = mysqli_query($conn, $bil);
-        while ($row = mysqli_fetch_assoc($resultHyr)) {
-            $rentedCars[] = $row['Regnr'];
-        }
         while ($row2 = mysqli_fetch_assoc($resultBil)) {
-            if(!in_array($row2['Regnr'], $rentedCars)){
-                $availableCars[] = $row2['Regnr'];
-            }
+            // echo $row2['Regnr'].'<br>';
+            $availableCars[] = array($row2['Regnr'], $row2['Marke'], $row2['Modell'], $row2['Arsmodell'], $row2['Matarstallning'], $row2['Antaldygn'], $row2['Gruppbet']);
         }
-        print_r($availableCars);
-        echo "<br>";
-        print_r($rentedCars);
+        // print_r($availableCars);
     }
 ?>
 <!DOCTYPE html>
@@ -28,6 +19,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <title>available cars</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -45,14 +37,45 @@
     </header>
     <!-- header section ends -->
     <h1 class="heading history">available <span>cars</span> </h1>
-    <table>
+    <table class="car-data">
         <thead>
             <tr>
                 <th>Regnr</th>
+                <th>Brand</th>
                 <th>Model</th>
+                <th>Year</th>
+                <th>Meter</th>
+                <th>Days</th>
+                <th>Group</th>
             </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+            <?php
+                foreach ($availableCars as $value) {
+                    echo '
+                    <tr>
+                        <td>'.$value[0].'</td>'.
+                        '<td>'.$value[1].'</td>'.
+                        '<td>'.$value[2].'</td>'.
+                        '<td>'.$value[3].'</td>'.
+                        '<td>'.$value[4].'</td>'.
+                        '<td>'.$value[5].'</td>'.
+                        '<td>'.$value[6].'</td>'.
+                    '</tr>
+                    ';
+                }
+            ?>
+            <!-- <tr>
+                <td>Regnr</td>
+                <td>Brand</td>
+                <td>Model</td>
+                <td>Year</td>
+                <td>Color</td>
+                <td>Meter</td>
+                <td>Days</td>
+                <td>Group</td>
+            </tr> -->
+        </tbody>
     </table>
 </body>
 </html>

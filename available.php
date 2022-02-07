@@ -4,14 +4,11 @@
         $in = $_GET['in'];
         $out = $_GET['out'];
         $availableCars = array();
-        // $bil = "SELECT * FROM `bil` WHERE `Regnr` not in (SELECT `Regnr` FROM `hyr` WHERE Indatum AND Utdatum BETWEEN '$out' AND '$in' UNION SELECT `Regnr` FROM `hyr` WHERE Indatum > '$in' AND Utdatum < '$out')";
         $bil = "SELECT *, Forsakring, Korttiddygn, korttidkm, Veckoslut, Veckoslutkm, Veckoslutfri FROM `bil` INNER JOIN gruppbet on bil.Gruppbet=gruppbet.Gruppbet WHERE `Regnr` not in (SELECT `Regnr` FROM `hyr` WHERE Indatum AND Utdatum BETWEEN '$out' AND '$in' UNION SELECT `Regnr` FROM `hyr` WHERE Indatum > '$in' AND Utdatum < '$out')";
         $resultBil = mysqli_query($conn, $bil);
         while ($row2 = mysqli_fetch_assoc($resultBil)) {
-            // echo $row2['Forsakring'].'<br>';
-            $availableCars[] = array($row2['Regnr'], $row2['Marke'], $row2['Modell'], $row2['Arsmodell'], $row2['Matarstallning'], $row2['Antaldygn'], $row2['Forsakring'], $row2['Korttiddygn'], $row2['korttidkm'], $row2['Veckoslut'], $row2['Veckoslutkm'], $row2['Veckoslutfri']);
+            $availableCars[] = array($row2['Regnr'], $row2['Marke'], $row2['Modell'], $row2['Matarstallning'], $row2['Antaldygn'], $row2['Forsakring'], $row2['Korttiddygn'], $row2['korttidkm'], $row2['Veckoslut'], $row2['Veckoslutkm'], $row2['Veckoslutfri'], $row2['Gruppbet']);
         }
-        // print_r($availableCars);
     }
 ?>
 <!DOCTYPE html>
@@ -44,7 +41,6 @@
                 <th>Regnr</th>
                 <th>Brand</th>
                 <th>Model</th>
-                <th>Year</th>
                 <th>Meter</th>
                 <th>Days</th>
                 <th>Insurance</th>
@@ -71,7 +67,7 @@
                         '<td>'.$value[8].'</td>'.
                         '<td>'.$value[9].'</td>'.
                         '<td>'.$value[10].'</td>'.
-                        '<td>'.$value[11].'</td>'.
+                        '<td><a href="rent.php?regnr='.$value[0].'&grupp='.$value[11].'">Rent</a></td>'.
                     '</tr>
                     ';
                 }

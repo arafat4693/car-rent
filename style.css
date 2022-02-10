@@ -524,6 +524,61 @@ header .menu {
 }
 /* car data */
 
+/* rent car */
+.yourCar .yourCar-container{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4rem;
+}
+
+.yourCar .yourCar-container .yourCar-box{
+  background-color: white;
+  box-shadow: 0 .1rem .5rem rgba(0, 0, 0, 0.1);
+  padding: 1rem 1.5rem;
+  border-radius: .5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.yourCar .yourCar-container .yourCar-box h1{
+  font-size: 2.5rem;
+  color: #575757;
+}
+
+.yourCar .yourCar-container .yourCar-box p{
+  font-size: 1.3rem;
+  color: #929292;
+}
+
+.yourCar .yourCar-container .yourCar-box i{
+  width: 5rem;
+  width: 5rem;
+  line-height: 5rem;
+  text-align: center;
+  border-radius: 50%;
+  /* background-color: hsl(331, 81%, 94%); */
+  font-size: 2rem;
+}
+
+.yourCar .yourCar-container select{
+  background-color: white;
+  box-shadow: 0 .1rem .5rem rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 5rem;
+  padding: 1rem 1.5rem;
+  border-radius: .5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #7e7e7e;
+}
+
+.yourCar .book-button{
+  margin-top: 3rem;
+  text-align: center;
+}
+/* rent car */
+
 /* media queries */
 @media (max-width: 1800px) {
   .extra {

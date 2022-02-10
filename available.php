@@ -45,7 +45,7 @@
                 <th>Days</th>
                 <th>Insurance</th>
                 <th>Short-term days</th>
-                <th>short-term km</th>
+                <th>Short-term km</th>
                 <th>Weekend</th>
                 <th>Weekend km</th>
                 <th>Weekend free</th>
@@ -67,7 +67,7 @@
                         '<td>'.$value[8].'</td>'.
                         '<td>'.$value[9].'</td>'.
                         '<td>'.$value[10].'</td>'.
-                        '<td><a href="rent.php?regnr='.$value[0].'&grupp='.$value[11].'">Rent</a></td>'.
+                        '<td><a href="rent.php?regnr='.$value[0].'&grupp='.$value[11].'&in='.$in.'&out='.$out.'">Rent</a></td>'.
                     '</tr>
                     ';
                 }

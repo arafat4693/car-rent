@@ -1,5 +1,6 @@
 <?php
 include "_connect.php";
+session_start();
 $regnr = $_GET['regnr'];
 $grupp = $_GET['grupp'];
 $in = $_GET['in'];
@@ -10,6 +11,12 @@ $carRes = mysqli_query($conn, $carSql);
 $carRow = mysqli_fetch_assoc($carRes);
 // echo $carRow['Korttidkm'];
 // print_r($carRow);
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $hyrtyp = $_POST['hyrtyp'];
+    $userId = $_SESSION['dinId'];
+    $insertSql = "INSERT INTO `hyr`(`KundId`, `Regnr`, `Utdatum`, `Indatum`, `Hyrtyp`) VALUES ('$userId','$regnr','$out','$in','$hyrtyp')";
+    $insertResult = mysqli_query($conn, $insertSql);
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +33,7 @@ $carRow = mysqli_fetch_assoc($carRes);
 <body>
     <section class="yourCar">
         <h1 class="heading">Your <span>Car</span></h1>
-        <div class="yourCar-container">
+        <form class="yourCar-container" action="<?php $_SERVER['PHP_SELF']?>" method="post">
             <div class="yourCar-box">
                 <div class="yourCar-content">
                     <h1>Regnr</h1>
@@ -112,15 +119,18 @@ $carRow = mysqli_fetch_assoc($carRes);
                 </div>
                 <i class="fa-solid fa-car" style="background-color: hsl(331, 81%, 94%); color: hsl(332, 89%, 56%);"></i>
             </div>
-            <select id="options">
-                <option value="st-days">short term days</option>
-                <option value="weekend">weekend</option>
-                <option value="weekendFree">weekend free</option>
+            <select id="options" name="hyrtyp">
+                <option value="korttid">short term days</option>
+                <option value="veckoslut">weekend</option>
+                <option value="veckoslutfri">weekend free</option>
             </select>
-        </div>
-        <div class="book-button">
-            <a href="#" class="btn">Book now</a>
-        </div>
+            <div class="book-button">
+                <input type="submit" value="Book now" class="btn">
+            </div>
+        </form>
+        <!-- <div class="book-button">
+            <a href="rent.php?change=true&<?php echo 'regnr='.$regnr.'&grupp='.$grupp.'&in='.$in.'&out='.$out?>" class="btn">Book now</a>
+        </div> -->
     </section>
 </body>
 </html>

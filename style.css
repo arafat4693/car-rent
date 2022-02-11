@@ -529,6 +529,7 @@ header .menu {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 4rem;
+  width:100%;
 }
 
 .yourCar .yourCar-container .yourCar-box{
@@ -576,6 +577,7 @@ header .menu {
 .yourCar .book-button{
   margin-top: 3rem;
   text-align: center;
+  width: 100%;
 }
 /* rent car */
 

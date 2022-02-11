@@ -14,6 +14,7 @@
                 session_start();
                 $_SESSION['loggedin'] = true;
                 $_SESSION['userId'] = $userId;
+                $_SESSION['dinId'] = $userId;
                 header("location: index.php");
             }else{
                 $showError = "Invalid credentials";

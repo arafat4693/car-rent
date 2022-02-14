@@ -1,6 +1,7 @@
 <?php
 include "_connect.php";
 session_start();
+$_SESSION['rent'] = true;
 $regnr = $_GET['regnr'];
 $grupp = $_GET['grupp'];
 $in = $_GET['in'];
@@ -9,14 +10,6 @@ $total = ((strtotime($in)-strtotime($out))/86400)+1;
 $carSql = "SELECT * FROM bil INNER JOIN gruppbet ON bil.Gruppbet = gruppbet.Gruppbet WHERE bil.Regnr = '$regnr'";
 $carRes = mysqli_query($conn, $carSql);
 $carRow = mysqli_fetch_assoc($carRes);
-// echo $carRow['Korttidkm'];
-// print_r($carRow);
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $hyrtyp = $_POST['hyrtyp'];
-    $userId = $_SESSION['dinId'];
-    $insertSql = "INSERT INTO `hyr`(`KundId`, `Regnr`, `Utdatum`, `Indatum`, `Hyrtyp`) VALUES ('$userId','$regnr','$out','$in','$hyrtyp')";
-    $insertResult = mysqli_query($conn, $insertSql);
-}
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +26,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <body>
     <section class="yourCar">
         <h1 class="heading">Your <span>Car</span></h1>
-        <form class="yourCar-container" action="<?php $_SERVER['PHP_SELF']?>" method="post">
+        <form class="yourCar-container" action="<?php echo 'confirmation.php?regnr='.$regnr.'&in='.$in.'&out='.$out?>" method="post">
+            <input type="hidden" name="rent" value="true">
             <div class="yourCar-box">
                 <div class="yourCar-content">
                     <h1>Regnr</h1>
@@ -77,6 +71,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     <p><?php echo $carRow['Forsakring'];?></p>
                     <p>For you: <?php echo $carRow['Forsakring'].'x'.$total;?></p>
                     <p>Toal Cost: <?php echo intval($carRow['Forsakring'])*$total;?></p>
+                    <input type="hidden" name="insurance" value="<?php echo intval($carRow['Forsakring'])*$total;?>">
                 </div>
                 <i class="fa-solid fa-car" style="background-color: hsl(211, 81%, 94%); color: hsl(212, 89%, 56%);"></i>
             </div>

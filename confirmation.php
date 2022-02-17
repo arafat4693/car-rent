@@ -38,10 +38,12 @@ if(isset($_SESSION['rent']) && $_SESSION['rent']==true){
             <p>regnr: <span><?php echo $regnr?></span></p>
             <p>utdatum: <span><?php echo $out?></span></p>
             <p>indatum: <span><?php echo $in?></span></p>
-            <p>Insurance: <span><?php echo $_POST['insurance'];?></span></p>
+            <p>Insurance: <span><?php echo $_POST['insurance'].' kr';?></span></p>
             <?php 
-            echo "<p>".$hyrtyp.": <span>".$_POST[$hyrtyp]."</span></p>";
+            echo "<p>".$hyrtyp.": <span>".$_POST[$hyrtyp]." kr</span></p>";
             ?>
+            <p>Total cost: <span><?php echo intval($_POST['insurance'])+intval($_POST[$hyrtyp]).' kr';?></span></p>
+            <a href="history.php" class="history-button btn">see your history</a>
         </div>
     </section>
 

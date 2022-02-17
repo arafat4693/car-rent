@@ -1,3 +1,8 @@
+<?php
+include "_connect.php";
+session_start();
+$userId = $_SESSION['dinId'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +31,44 @@
         <!-- header section ends -->
         <h1 class="heading history">Your <span>history</span> </h1>
 
-        <div class="message">You didn't hire any car recently, so your history is empty</div>
+        <section class="history_container">
+            <table class="car-data">
+                <thead>
+                    <tr>
+                        <th>Regnr</th>
+                        <th>Booking date</th>
+                        <th>Out date</th>
+                        <th>Entry date</th>
+                        <th>Rent type</th>
+                        <th>Total km</th>
+                        <th>Cost</th>
+                        <th>fuel cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $historySql = "SELECT * FROM hyr WHERE KundId='$userId'";
+                    $historyResult = mysqli_query($conn, $historySql);
+                    if($historyResult){
+                        while($row=mysqli_fetch_assoc($historyResult)){
+                    ?>
+                    <tr>
+                        <td><?php echo $row['Regnr'];?></td>
+                        <td><?php echo $row['Bokningsdatum'];?></td>
+                        <td><?php echo $row['Utdatum'];?></td>
+                        <td><?php echo $row['Indatum'];?></td>
+                        <td><?php echo $row['Hyrtyp'];?></td>
+                        <td><?php echo $row['AntalKm'];?></td>
+                        <td><?php echo $row['Kostnad'];?></td>
+                        <td><?php echo $row['Bensinkostnad'];?></td>
+                    </tr>
+                    <?php 
+                        }
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </section>
 
 </body>
 </html>

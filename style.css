@@ -488,6 +488,10 @@ header .menu {
   margin-top: 5rem;
   font-weight: 600;
 }
+
+.history_container .car-data{
+  margin-top: 0;
+}
 /* history style end*/
 
 /* car data */
@@ -582,14 +586,34 @@ header .menu {
 /* rent car */
 
 /* confirmtion */
-/* .cofirm_container{
-} */
+.cofirm_container h1{
+  margin-bottom: 2.5rem;
+}
 
 .confirmation{
-  /* background-color: #10f11c; */
   width: 55rem;
   margin: 0 auto;
-  padding-top: 3rem;
+  background-color: #fff;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: .5rem;
+  padding: 1.5rem 2rem;
+}
+
+.confirmation p{
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #ff0000;
+}
+
+.confirmation p span{
+  color: #464646;
+}
+
+.confirmation .history-button{
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
 }
 /* confirmtion */
 

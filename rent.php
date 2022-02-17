@@ -81,6 +81,7 @@ $carRow = mysqli_fetch_assoc($carRes);
                     <p><?php echo $carRow['Korttiddygn'];?></p>
                     <p>For you: <?php echo $carRow['Korttiddygn'].'x'.$total;?></p>
                     <p>Toal Cost: <?php echo intval($carRow['Korttiddygn'])*$total;?></p>
+                    <input type="hidden" name="korttid" value="<?php echo intval($carRow['Korttiddygn'])*$total;?>">
                 </div>
                 <i class="fa-solid fa-car" style="background-color: hsl(278, 81%, 94%); color: hsl(279, 89%, 56%);"></i>
             </div>
@@ -90,6 +91,7 @@ $carRow = mysqli_fetch_assoc($carRes);
                     <p><?php echo $carRow['Veckoslut'];?></p>
                     <p>For you: <?php echo $carRow['Veckoslut'].'x'.$total;?></p>
                     <p>Toal Cost: <?php echo intval($carRow['Veckoslut'])*$total;?></p>
+                    <input type="hidden" name="veckoslut" value="<?php echo intval($carRow['Veckoslut'])*$total;?>">
                 </div>
                 <i class="fa-solid fa-car" style="background-color: hsl(161, 81%, 94%); color: hsl(162, 89%, 56%);"></i>
             </div>
@@ -111,6 +113,7 @@ $carRow = mysqli_fetch_assoc($carRes);
                 <div class="yourCar-content">
                     <h1>Weekend free</h1>
                     <p><?php echo $carRow['Veckoslutfri'];?></p>
+                    <input type="hidden" name="veckoslutfri" value="<?php echo $carRow['Veckoslutfri'];?>">
                 </div>
                 <i class="fa-solid fa-car" style="background-color: hsl(331, 81%, 94%); color: hsl(332, 89%, 56%);"></i>
             </div>

@@ -581,6 +581,18 @@ header .menu {
 }
 /* rent car */
 
+/* confirmtion */
+/* .cofirm_container{
+} */
+
+.confirmation{
+  /* background-color: #10f11c; */
+  width: 55rem;
+  margin: 0 auto;
+  padding-top: 3rem;
+}
+/* confirmtion */
+
 /* media queries */
 @media (max-width: 1800px) {
   .extra {

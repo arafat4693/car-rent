@@ -30,7 +30,7 @@ if(isset($_SESSION['rent']) && $_SESSION['rent']==true){
     $selectResult = mysqli_query($conn, $select);
     $selectRow = mysqli_fetch_assoc($selectResult);
     ?>
-    <section class="container">
+    <section class="cofirm_container">
         <h1 class="heading" style="margin-top:10px;">Thanks for renting our <span>Car</span></h1>
         <div class="confirmation">
             <p>your id: <span><?php echo $selectRow['KundId']?></span></p>
@@ -38,7 +38,10 @@ if(isset($_SESSION['rent']) && $_SESSION['rent']==true){
             <p>regnr: <span><?php echo $regnr?></span></p>
             <p>utdatum: <span><?php echo $out?></span></p>
             <p>indatum: <span><?php echo $in?></span></p>
-            <p>Insurance: <span><?php echo $_POST['insurance']?></span></p>
+            <p>Insurance: <span><?php echo $_POST['insurance'];?></span></p>
+            <?php 
+            echo "<p>".$hyrtyp.": <span>".$_POST[$hyrtyp]."</span></p>";
+            ?>
         </div>
     </section>
 

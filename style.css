@@ -601,14 +601,16 @@ header .menu {
 }
 
 .confirmation p,
-.staff_user form p{
+.staff_user form p,
+.pay-container p{
   font-size: 1.7rem;
   font-weight: 600;
   color: #ff0000;
 }
 
 .confirmation p span,
-.staff_user form p span{
+.staff_user form p span,
+.pay-container p span{
   color: #464646;
 }
 
@@ -651,6 +653,17 @@ header .menu {
   margin-top:1rem;
 }
 /* staff contaner */
+
+/* reciept container */
+.pay-container{
+  background-color: #fff;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: .5rem;
+  padding: 1.5rem;
+  width: max-content;
+  margin: 0 auto;
+}
+/* reciept container */
 
 /* media queries */
 @media (max-width: 1800px) {

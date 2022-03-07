@@ -37,7 +37,7 @@
                 <input type="hidden" name="regnr" value="<?php echo $row['Regnr']?>">
                 <p>regnr: <span><?php echo $row['Regnr']?></p>
                 <p>Number of km out: <span><?php echo $row2['Matarstallning']?></span></p>
-                <p>Number of km in: <input type="number"/></p>
+                <p>Number of km in: <input type="number" name="kmIn"/></p>
                 <input type="hidden" name="outDate" value="<?php echo $row['Utdatum']?>">
                 <p>Out date: <span><input type="text" value="<?php echo $row['Utdatum']?>"/></p>
                 <input type="hidden" name="entryDate" value="<?php echo $row['Indatum']?>">

@@ -17,6 +17,10 @@
 <body>
     <section class="staff_container">
         <h1 class="heading" style="margin-top:10px;">Rented <span>Cars</span></h1>
+        <div class="links">
+            <a href="index.php">Home</a>
+            <span>/</span>
+        </div>
         <div class="staff_user">
             <?php 
             $staffSql = "SELECT * FROM hyr  WHERE `AntalKm` is NULL ORDER BY Indatum ASC";
@@ -42,7 +46,7 @@
                 <p>Out date: <span><input type="text" value="<?php echo $row['Utdatum']?>"/></p>
                 <input type="hidden" name="entryDate" value="<?php echo $row['Indatum']?>">
                 <p>Entry date: <input type="text" value="<?php echo $row['Indatum']?>"/></p>
-                <p>Fuel cost: <input type="number"/></p>
+                <p>Fuel cost: <input type="number" name="fuel"/></p>
                 <select id="options" name="hyrtyp">
                     <option value="korttid" <?php echo ($row['Hyrtyp'] === 'korttid' || $row['Hyrtyp'] === 'Korttid') ? 'selected' : null?>>short term days</option>
                     <option value="veckoslut" <?php echo ($row['Hyrtyp'] === 'veckoslut') ? 'selected' : null?>>weekend</option>
@@ -50,7 +54,7 @@
                 </select>
                 <input type="hidden" name="totalDays" value="<?php echo $total?>">
                 <input type="hidden" name="numberOfKm" value="<?php echo $row2['Matarstallning']?>">
-                <input type="submit" value="count" class="btn">
+                <input type="submit" value="count" class="btn" name="count">
             </form>
             <?php
                 }

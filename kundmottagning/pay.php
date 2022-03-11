@@ -3,6 +3,16 @@
     include "../_connect.php";
     if($_SESSION['staffLogin'] != true){
         header("location: stafflogin.php");
+        die;
+    }
+    if(isset($_POST['logout'])){
+        header("location: stafflogin.php");
+        $_SESSION['staffLogin'] = false;
+        die;
+    }
+    if(isset($_POST['home'])){
+        header("location: index.php");
+        die;
     }
     $customerId = $_POST['customerId'];
     $regnr = $_POST['regnr'];
@@ -41,6 +51,11 @@
     <script src="app.js" defer></script>
 </head>
 <body>
+    <form class="links" action="<?php $_SERVER['PHP_SELF']?>" method="post">
+        <input type="submit" value="Home" class="btn" name="home">
+        <span>/</span>
+        <input type="submit" value="Log out" class="btn" name="logout">
+    </form>
     <section class="to-pay">
         <h1 class="heading" style="margin-top:10px;">To <span>Pay</span></h1>
         <form class="pay-container" method="post" target="_blank" action="reciept.php">

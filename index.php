@@ -1,16 +1,12 @@
 <?php
     session_start();
     include "_connect.php";
-    if($_SESSION['loggedin'] != true){
-        header("location: login.php");
-    }
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $signout = $_POST['signout'];
-        if($signout){
-            $_SESSION['loggedin'] = false;
-            header("location: login.php");
-        }
+    if(isset($_POST['signin']) || isset($_POST['signout'])){
+        header('Location: login.php');
+    }
+    if(isset($_POST['signout'])){
+        $_SESSION['loggedin'] = false;
     }
 ?>
 <!DOCTYPE html>
@@ -40,9 +36,15 @@
             <a href="#contact">contact</a>
         </nav>
         <form class="registration" method="post" action="index.php">
-            <input type="submit" value="sign out" class="btn signup_btn" name="signout"/>
+            <?php
+                if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+                    echo '<input type="submit" value="sign out" class="btn signup_btn" name="signout"/>
+                    <a href="history.php" class="icon"><i class="fas fa-history"></i></a>';
+                }else{
+                    echo '<input type="submit" value="sign in" class="btn signup_btn" name="signin"/>';
+                }
+            ?>
             <div class="menu fas fa-bars"></div>
-            <a href="history.php" class="icon"><i class="fas fa-history"></i></a>
         </form>
     </header>
     <!-- header section ends -->
@@ -78,7 +80,11 @@
                 <span>to: </span>
                 <input type="date" name="in">
             </div>
-            <input type="submit" class="btn submitBtn" value="search" name="search">
+            <?php
+                if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+                    echo '<input type="submit" class="btn submitBtn" value="search" name="search">';
+                }
+            ?>
         </form>
     </section>
     <!-- home section ends -->

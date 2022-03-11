@@ -1,15 +1,20 @@
 <?php 
 include "_connect.php";
 session_start();
-$regnr = $_GET['regnr'];
-$in = $_GET['in'];
-$out = $_GET['out'];
-$hyrtyp = $_POST['hyrtyp'];
-$userId = $_SESSION['dinId'];
-if(isset($_SESSION['rent']) && $_SESSION['rent']==true){
-    $insertSql = "INSERT INTO `hyr`(`KundId`, `Regnr`, `Utdatum`, `Indatum`, `Hyrtyp`) VALUES ('$userId','$regnr','$out','$in','$hyrtyp')";
-    $insertResult = mysqli_query($conn, $insertSql);
-    $_SESSION['rent'] = false;
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+    $regnr = $_GET['regnr'];
+    $in = $_GET['in'];
+    $out = $_GET['out'];
+    $hyrtyp = $_POST['hyrtyp'];
+    $userId = $_SESSION['dinId'];
+    if(isset($_SESSION['rent']) && $_SESSION['rent']==true){
+        $insertSql = "INSERT INTO `hyr`(`KundId`, `Regnr`, `Utdatum`, `Indatum`, `Hyrtyp`) VALUES ('$userId','$regnr','$out','$in','$hyrtyp')";
+        $insertResult = mysqli_query($conn, $insertSql);
+        $_SESSION['rent'] = false;
+    }
+}else{
+    header('Location: login.php');
+    die;
 }
 ?>
 

@@ -3,8 +3,9 @@ session_start();
 include "../_connect.php";
 if($_SESSION['staffLogin'] != true){
     header("location: stafflogin.php");
+    die;
 }
-print_r($_POST);
+
 $hyrSql = "UPDATE hyr SET `AntalKm`='".$_POST['totalKm']."', `Kostnad`='".$_POST['totalCost']."', `Bensinkostnad`='".$_POST['fuel']."' WHERE `KundId`=".$_POST['KundId']." AND `Regnr`='".$_POST['regnr']."' AND `Bokningsdatum`='".$_POST['bookingDate']."'";
 $hyrRes = mysqli_query($conn, $hyrSql);
 $bilSql = "UPDATE bil SET `Matarstallning`='".$_POST['kmIn']."' WHERE `Regnr`='".$_POST['regnr']."'";

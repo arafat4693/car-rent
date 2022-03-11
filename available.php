@@ -1,14 +1,20 @@
 <?php
-    if($_SERVER['REQUEST_METHOD'] == 'GET'){
-        include "_connect.php";
-        $in = $_GET['in'];
-        $out = $_GET['out'];
-        $availableCars = array();
-        $bil = "SELECT *, Forsakring, Korttiddygn, korttidkm, Veckoslut, Veckoslutkm, Veckoslutfri FROM `bil` INNER JOIN gruppbet on bil.Gruppbet=gruppbet.Gruppbet WHERE `Regnr` not in (SELECT `Regnr` FROM `hyr` WHERE Indatum AND Utdatum BETWEEN '$out' AND '$in' UNION SELECT `Regnr` FROM `hyr` WHERE Indatum > '$in' AND Utdatum < '$out')";
-        $resultBil = mysqli_query($conn, $bil);
-        while ($row2 = mysqli_fetch_assoc($resultBil)) {
-            $availableCars[] = array($row2['Regnr'], $row2['Marke'], $row2['Modell'], $row2['Matarstallning'], $row2['Antaldygn'], $row2['Forsakring'], $row2['Korttiddygn'], $row2['korttidkm'], $row2['Veckoslut'], $row2['Veckoslutkm'], $row2['Veckoslutfri'], $row2['Gruppbet']);
+    session_start();
+    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+        if($_SERVER['REQUEST_METHOD'] == 'GET'){
+            include "_connect.php";
+            $in = $_GET['in'];
+            $out = $_GET['out'];
+            $availableCars = array();
+            $bil = "SELECT *, Forsakring, Korttiddygn, korttidkm, Veckoslut, Veckoslutkm, Veckoslutfri FROM `bil` INNER JOIN gruppbet on bil.Gruppbet=gruppbet.Gruppbet WHERE `Regnr` not in (SELECT `Regnr` FROM `hyr` WHERE Indatum AND Utdatum BETWEEN '$out' AND '$in' UNION SELECT `Regnr` FROM `hyr` WHERE Indatum > '$in' AND Utdatum < '$out')";
+            $resultBil = mysqli_query($conn, $bil);
+            while ($row2 = mysqli_fetch_assoc($resultBil)) {
+                $availableCars[] = array($row2['Regnr'], $row2['Marke'], $row2['Modell'], $row2['Matarstallning'], $row2['Antaldygn'], $row2['Forsakring'], $row2['Korttiddygn'], $row2['korttidkm'], $row2['Veckoslut'], $row2['Veckoslutkm'], $row2['Veckoslutfri'], $row2['Gruppbet']);
+            }
         }
+    }else{
+        header('Location: login.php');
+        die;
     }
 ?>
 <!DOCTYPE html>

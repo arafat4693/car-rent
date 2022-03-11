@@ -1,7 +1,12 @@
 <?php
 include "_connect.php";
 session_start();
-$userId = $_SESSION['dinId'];
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+    $userId = $_SESSION['dinId'];
+}else{
+    header('Location: login.php');
+    die;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

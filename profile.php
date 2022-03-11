@@ -3,39 +3,44 @@ $update = false;
 
 session_start();
 include "_connect.php";
-$row = array();
-$username = $_SESSION['username'];
-$addres = $_SESSION['addres'];
-$postaddres = $_SESSION['postaddres'];
-$telefon = $_SESSION['telefon'];
-$mobiltelefon = $_SESSION['mobiltelefon'];
-$email = $_SESSION['email'];
-$pass = $_SESSION['pass'];
-
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $new_username = $_SESSION['username'] = $_POST['username'];
-    $new_addres = $_SESSION['addres'] = $_POST['addres'];
-    $new_postaddres = $_SESSION['postaddres'] = $_POST['post-addres'];
-    $new_telefon = $_SESSION['telefon'] = $_POST['telefon'];
-    $new_mobiltelefon = $_SESSION['mobiltelefon'] = $_POST['mobil-telefon'];
-    $new_email = $_SESSION['email'] = $_POST['email'];
-    $new_pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $_SESSION['pass'] = $_POST['password'];
-    $_SESSION['Hashpass'] = $new_pass;
-
-    $updateSql = "UPDATE `kund` SET `KundNamn`='$new_username',`Adress`='$new_addres',`Postadress`='$new_postaddres',`Tel`='$new_telefon',`MobilTel`='$new_mobiltelefon',`Epost`='$new_email',`Password`='$new_pass' WHERE KundId=".$_SESSION['KundId'];
-    $updateResult = mysqli_query($conn, $updateSql);
-    if($updateResult){
-        $update = true;
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+    $row = array();
+    $username = $_SESSION['username'];
+    $addres = $_SESSION['addres'];
+    $postaddres = $_SESSION['postaddres'];
+    $telefon = $_SESSION['telefon'];
+    $mobiltelefon = $_SESSION['mobiltelefon'];
+    $email = $_SESSION['email'];
+    $pass = $_SESSION['pass'];
+    
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $new_username = $_SESSION['username'] = $_POST['username'];
+        $new_addres = $_SESSION['addres'] = $_POST['addres'];
+        $new_postaddres = $_SESSION['postaddres'] = $_POST['post-addres'];
+        $new_telefon = $_SESSION['telefon'] = $_POST['telefon'];
+        $new_mobiltelefon = $_SESSION['mobiltelefon'] = $_POST['mobil-telefon'];
+        $new_email = $_SESSION['email'] = $_POST['email'];
+        $new_pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $_SESSION['pass'] = $_POST['password'];
+        $_SESSION['Hashpass'] = $new_pass;
+    
+        $updateSql = "UPDATE `kund` SET `KundNamn`='$new_username',`Adress`='$new_addres',`Postadress`='$new_postaddres',`Tel`='$new_telefon',`MobilTel`='$new_mobiltelefon',`Epost`='$new_email',`Password`='$new_pass' WHERE KundId=".$_SESSION['KundId'];
+        $updateResult = mysqli_query($conn, $updateSql);
+        if($updateResult){
+            $update = true;
+        }
+    }else{
+        $hashedPass = $_SESSION['Hashpass'];
+        $sql = "SELECT `KundId`, `KundNamn`, `Adress`, `Postadress`, `Tel`, `MobilTel`, `Epost`, `Password` FROM `kund` WHERE '$username' = `KundNamn` AND '$addres' = `Adress` AND '$postaddres' = `Postadress` AND '$telefon' = `Tel` AND '$mobiltelefon' = `MobilTel` AND '$email' = `Epost` AND '$hashedPass' = `Password`";
+        $result = mysqli_query($conn, $sql);
+        if($result){
+            $row = mysqli_fetch_assoc($result);
+            $_SESSION['KundId'] = $row['KundId'];
+        }
     }
 }else{
-    $hashedPass = $_SESSION['Hashpass'];
-    $sql = "SELECT `KundId`, `KundNamn`, `Adress`, `Postadress`, `Tel`, `MobilTel`, `Epost`, `Password` FROM `kund` WHERE '$username' = `KundNamn` AND '$addres' = `Adress` AND '$postaddres' = `Postadress` AND '$telefon' = `Tel` AND '$mobiltelefon' = `MobilTel` AND '$email' = `Epost` AND '$hashedPass' = `Password`";
-    $result = mysqli_query($conn, $sql);
-    if($result){
-        $row = mysqli_fetch_assoc($result);
-        $_SESSION['KundId'] = $row['KundId'];
-    }
+    header('Location: login.php');
+    die;
 }
 ?>
 <!DOCTYPE html>

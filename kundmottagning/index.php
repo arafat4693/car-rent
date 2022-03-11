@@ -3,6 +3,12 @@
     include "../_connect.php";
     if($_SESSION['staffLogin'] != true){
         header("location: stafflogin.php");
+        die;
+    }
+    if(isset($_POST['logout'])){
+        header("location: stafflogin.php");
+        $_SESSION['staffLogin'] = false;
+        die;
     }
 ?>
 <!DOCTYPE html>
@@ -17,10 +23,11 @@
 <body>
     <section class="staff_container">
         <h1 class="heading" style="margin-top:10px;">Rented <span>Cars</span></h1>
-        <div class="links">
-            <a href="index.php">Home</a>
+        <form class="links" action="<?php $_SERVER['PHP_SELF']?>" method="post">
+            <input type="submit" value="Home" class="btn" name="home">
             <span>/</span>
-        </div>
+            <input type="submit" value="Log out" class="btn" name="logout">
+        </form>
         <div class="staff_user">
             <?php 
             $staffSql = "SELECT * FROM hyr  WHERE `AntalKm` is NULL ORDER BY Indatum ASC";

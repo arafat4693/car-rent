@@ -1,15 +1,20 @@
 <?php
 include "_connect.php";
 session_start();
-$_SESSION['rent'] = true;
-$regnr = $_GET['regnr'];
-$grupp = $_GET['grupp'];
-$in = $_GET['in'];
-$out = $_GET['out'];
-$total = ((strtotime($in)-strtotime($out))/86400)+1;
-$carSql = "SELECT * FROM bil INNER JOIN gruppbet ON bil.Gruppbet = gruppbet.Gruppbet WHERE bil.Regnr = '$regnr'";
-$carRes = mysqli_query($conn, $carSql);
-$carRow = mysqli_fetch_assoc($carRes);
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){
+    $_SESSION['rent'] = true;
+    $regnr = $_GET['regnr'];
+    $grupp = $_GET['grupp'];
+    $in = $_GET['in'];
+    $out = $_GET['out'];
+    $total = ((strtotime($in)-strtotime($out))/86400)+1;
+    $carSql = "SELECT * FROM bil INNER JOIN gruppbet ON bil.Gruppbet = gruppbet.Gruppbet WHERE bil.Regnr = '$regnr'";
+    $carRes = mysqli_query($conn, $carSql);
+    $carRow = mysqli_fetch_assoc($carRes);
+}else{
+    header('Location: login.php');
+    die;
+}
 ?>
 
 <!DOCTYPE html>

@@ -4,7 +4,7 @@
   box-sizing: border-box;
   transition: 0.2s linear;
   text-decoration: none;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   border: none;
   outline: none;
   font-family: "Poppins", sans-serif;
@@ -567,7 +567,9 @@ header .menu {
 }
 
 .yourCar .yourCar-container select,
-.staff_user form select{
+.staff_user form select,
+.newUser select,
+.all_user form select{
   background-color: white;
   box-shadow: 0 .1rem .5rem rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -602,7 +604,9 @@ header .menu {
 
 .confirmation p,
 .staff_user form p,
-.pay-container p{
+.pay-container p,
+.all_user form p,
+.newUser p{
   font-size: 1.7rem;
   font-weight: 600;
   color: #ff0000;
@@ -628,13 +632,15 @@ header .menu {
   display: grid;
 }
 
-.staff_user{
+.staff_user,
+.all_user{
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 3rem;
 }
 
-.staff_user form{
+.staff_user form,
+.all_user form{
   width: 100%;
   background-color: #f3f3f3;
   box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
@@ -643,13 +649,16 @@ header .menu {
 }
 
 .staff_user form input[type=text],
-.staff_user form input[type=number]{
+.staff_user form input[type=number],
+.all_user form input,
+.newUser input{
   padding: .7rem 1rem;
   border: .1rem solid rgb(238, 238, 238);
   border-radius: .5rem;
 }
 
-.staff_user form select{
+.staff_user form select,
+.all_user form select{
   margin-top:1rem;
 }
 /* staff contaner */

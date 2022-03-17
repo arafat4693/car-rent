@@ -7,13 +7,20 @@
         $password = $_POST['password'];
         $sql = "SELECT * FROM users WHERE uid='$uid'";
         $result = mysqli_query($conn, $sql);
-        if($result){
-            $row = mysqli_fetch_assoc($result);
+        $row = mysqli_fetch_assoc($result);
+        if($result && $row['grupp'] === 'kundmottagare'){
             $staffLogin = true;
             session_start();
             $_SESSION['staffLogin'] = true;
             $_SESSION['uid'] = $uid;
+            $_SESSION['grupp'] = $row['grupp'];
             header("location: index.php");
+        }else if($result && $row['grupp'] === 'admin'){
+            session_start();
+            $_SESSION['adminLogin'] = true;
+            $_SESSION['uid'] = $uid;
+            $_SESSION['grupp'] = $row['grupp'];
+            header("location: ../admin/index.php");
         }
     }
 ?>

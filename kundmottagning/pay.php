@@ -20,7 +20,8 @@
     $customerRes = mysqli_query($conn, $customerSql);
     $customerRow = mysqli_fetch_assoc($customerRes);
 
-    $gruppSql = "SELECT *, Forsakring, Korttiddygn, Korttidkm, Veckoslut, Veckoslutkm, Veckoslutfri FROM bil INNER JOIN gruppbet ON bil.Gruppbet = gruppbet.Gruppbet WHERE bil.Regnr = '$regnr'";
+    $gruppSql = "SELECT *, Forsakring, Korttiddygn, Korttidkm, Veckoslut, Veckoslutkm, Veckoslutfri FROM bil
+    INNER JOIN gruppbet ON bil.Gruppbet = gruppbet.Gruppbet WHERE bil.Regnr = '$regnr'";
     $gruppRes = mysqli_query($conn, $gruppSql);
     $gruppRow = mysqli_fetch_assoc($gruppRes);
     // print_r($gruppRow);
@@ -38,7 +39,6 @@
             $rentType = 'Veckoslutfri';
             break;
     }
-    // print_r($gruppRow[$rentType]*'4');
 ?>
 <!DOCTYPE html>
 <html lang="en">

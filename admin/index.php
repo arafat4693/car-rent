@@ -10,9 +10,9 @@
 <body>
     <div class="buttons">
         <a href="users.php" class="btn">users</a>
-        <a href="#" class="btn">customers</a>
-        <a href="#" class="btn">cars</a>
-        <a href="#" class="btn">price</a>
+        <a href="customers.php" class="btn">customers</a>
+        <a href="cars.php" class="btn">cars</a>
+        <a href="pricegroup.php" class="btn">price</a>
         <a href="#" class="btn">rented</a>
         <a href="#" class="btn">log out</a>
     </div>

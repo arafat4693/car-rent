@@ -49,7 +49,7 @@
             </select>
             <input type="submit" name="create" value="Create" class="btn">
         </form>
-        <h3 style="margin-top:3rem;">all users</h3>
+        <h3 style="margin-top:3rem;" class="heading">All <span>Users</span></h3>
         <div class="all_user">
             <?php 
             $admSql = "SELECT * FROM users";

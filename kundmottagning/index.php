@@ -2,7 +2,7 @@
     session_start();
     include "../_connect.php";
     if($_SESSION['staffLogin'] != true){
-        header("location: stafflogin.php");
+        header("location: ../kundmottagning/stafflogin.php");
         die;
     }
     if(isset($_POST['logout'])){

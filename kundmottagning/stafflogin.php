@@ -1,6 +1,7 @@
 <?php
     $staffLogin = false;
     $showError = false;
+    $groups = ['kundmottagare', 'admin'];
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         include "../_connect.php";
         $uid = $_POST['uid'];
@@ -8,19 +9,17 @@
         $sql = "SELECT * FROM users WHERE uid='$uid'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
-        if($result && $row['grupp'] === 'kundmottagare'){
+        if($result && in_array($row['grupp'], $groups)){
             $staffLogin = true;
             session_start();
             $_SESSION['staffLogin'] = true;
             $_SESSION['uid'] = $uid;
             $_SESSION['grupp'] = $row['grupp'];
-            header("location: index.php");
-        }else if($result && $row['grupp'] === 'admin'){
-            session_start();
-            $_SESSION['adminLogin'] = true;
-            $_SESSION['uid'] = $uid;
-            $_SESSION['grupp'] = $row['grupp'];
-            header("location: ../admin/index.php");
+            if($row['grupp'] == 'kundmottagare'){
+                header("location: index.php");
+            }else if($row['grupp'] == 'admin'){
+                header("location: ../admin/index.php");
+            }
         }
     }
 ?>

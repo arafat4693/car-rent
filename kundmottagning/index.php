@@ -23,11 +23,20 @@
 <body>
     <section class="staff_container">
         <h1 class="heading" style="margin-top:10px;">Rented <span>Cars</span></h1>
-        <form class="links" action="<?php $_SERVER['PHP_SELF']?>" method="post">
-            <input type="submit" value="Home" class="btn" name="home">
-            <span>/</span>
-            <input type="submit" value="Log out" class="btn" name="logout">
-        </form>
+        <?php
+        if($_SESSION['grupp'] === 'kundmottagare'){
+            echo '
+            <form class="links" action="'.$_SERVER['PHP_SELF'].'" method="post">
+                <input type="submit" value="Home" class="btn" name="home">
+                <span>/</span>
+                <input type="submit" value="Log out" class="btn" name="logout">
+            </form>
+            ';
+        }else if($_SESSION['grupp'] === 'admin'){
+            echo '<a href="../admin/index.php" class="btn">Home</a>';
+        }
+        ?>
+
         <div class="staff_user">
             <?php 
             $staffSql = "SELECT * FROM hyr  WHERE `AntalKm` is NULL ORDER BY Indatum ASC";

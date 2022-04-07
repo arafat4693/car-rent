@@ -1,7 +1,7 @@
 <?php
     $staffLogin = false;
     $showError = false;
-    $groups = ['kundmottagare', 'admin'];
+    $groups = ['kundmottagare', 'admin', 'ekonom'];
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
         include "../_connect.php";
         $uid = $_POST['uid'];
@@ -19,6 +19,8 @@
                 header("location: index.php");
             }else if($row['grupp'] == 'admin'){
                 header("location: ../admin/index.php");
+            }else if($row['grupp'] == 'ekonom'){
+                header("location: ../ekonom/index.php");
             }
         }
     }

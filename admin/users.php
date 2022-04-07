@@ -65,6 +65,7 @@
                 <select name="group">
                     <option <?php echo ($row['grupp'] === 'kundmottagare') ? 'selected' : null?> value="kundmottagare">kundmottagare</option>
                     <option <?php echo ($row['grupp'] === 'admin') ? 'selected' : null?> value="admin">admin</option>
+                    <option <?php echo ($row['grupp'] === 'ekonom') ? 'selected' : null?> value="ekonom">Ekonom</option>
                 </select>
                 <input type="submit" value="Update" class="btn" name="update">
             </form>

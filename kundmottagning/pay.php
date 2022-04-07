@@ -104,7 +104,7 @@
             <p>Km cost: <span><?php echo $kmCost;?></span></p>
             <input type="hidden" name="kmCost" value="<?php echo $kmCost;?>">
 
-            <p>Km cost: <span><?php echo $_POST['fuel'];?></span></p>
+            <p>Fuel cost: <span><?php echo $_POST['fuel'];?></span></p>
             <input type="hidden" name="fuel" value="<?php echo $_POST['fuel'];?>">
 
             <p>Total cost: <span><?php echo $kmCost+(intval($gruppRow['Forsakring'])*intval($_POST['totalDays']))+(intval($gruppRow[$rentType])*intval($_POST['totalDays']))+intval($_POST['fuel']);?></span></p>

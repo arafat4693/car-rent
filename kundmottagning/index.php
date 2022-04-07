@@ -34,6 +34,8 @@
             ';
         }else if($_SESSION['grupp'] === 'admin'){
             echo '<a href="../admin/index.php" class="btn">Home</a>';
+        }else if($_SESSION['grupp'] === 'ekonom'){
+            echo '<a href="../ekonom/index.php" class="btn">Home</a>';
         }
         ?>
 

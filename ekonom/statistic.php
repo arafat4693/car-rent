@@ -12,6 +12,44 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    hello
+    <section>
+        <h1 class="heading"><span>Statistic</span></h1>
+        <form method="post" class="statistic">
+            <input name="start" type="date" placeholder="start date" class="box">
+            <input name="stop" type="date" placeholder="stop date" class="box">
+            <input type="submit" class="btn" value="Count">
+        </form>
+        <div style="margin-top: 3rem;">
+            <h1 class="heading"><span>Income</span></h1>
+            <table class="car-data">
+                <thead>
+                    <tr>
+                        <th>Sum</th>
+                        <th>Average</th>
+                        <th>Rented cars</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+        <div style="margin-top: 3rem;">
+            <h1 class="heading"><span>Income</span> per car</h1>
+            <table class="car-data">
+                <thead>
+                    <tr>
+                        <th>Regnr</th>
+                        <th>Sum</th>
+                        <th>Average</th>
+                        <th>Rented cars</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </section>
 </body>
 </html>

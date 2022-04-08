@@ -674,6 +674,35 @@ header .menu {
 }
 /* reciept container */
 
+.statistic {
+  background-color: rgb(250, 250, 250);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  width: 50rem;
+  padding: 2rem;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.statistic .box {
+  display: block;
+  width: 100%;
+  padding: 0.7rem;
+  text-decoration: none;
+  border: 0.1rem solid #666;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  text-transform: none;
+}
+
+.statistic .box:focus {
+  border-color: #ff0000;
+}
+
+.statistic .btn {
+  width: 100%;
+}
+
 /* media queries */
 @media (max-width: 1800px) {
   .extra {

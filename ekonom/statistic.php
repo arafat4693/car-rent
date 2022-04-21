@@ -17,7 +17,7 @@
         <form method="post" class="statistic">
             <input name="start" type="date" placeholder="start date" class="box">
             <input name="stop" type="date" placeholder="stop date" class="box">
-            <input type="submit" class="btn" value="Count">
+            <input type="submit" class="btn" value="Count" name="search">
         </form>
         <div style="margin-top: 3rem;">
             <h1 class="heading"><span>Income</span></h1>
@@ -30,7 +30,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    <?php
+                    if(isset($_POST['search'])){
+                        $start = $_POST['start'];
+                        $stop = $_POST['stop'];
+                        $incomesql = "SELECT SUM(`Kostnad`) as summa, CAST(avg(`Kostnad`) AS decimal(38,0)) as medel
+                        FROM hyr WHERE indatum BETWEEN '$start' AND '$stop'";
+                        $res = mysqli_query($conn, $incomesql);
+                        print_r($res);
+                        
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>

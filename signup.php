@@ -27,6 +27,7 @@
             $sql = "INSERT INTO `kund`(`KundNamn`, `Adress`, `Postadress`, `Tel`, `MobilTel`, `Epost`, `Password`) VALUES ('$username','$addres','$postaddres','$telefon','$mobiltelefon','$email','$hash')";
             $result = mysqli_query($conn, $sql);
             if($result){
+                $_SESSION['loggedin'] = true;
                 header("location: profile.php");
             }
         }

@@ -34,11 +34,17 @@
                     if(isset($_POST['search'])){
                         $start = $_POST['start'];
                         $stop = $_POST['stop'];
-                        $incomesql = "SELECT SUM(`Kostnad`) as summa, CAST(avg(`Kostnad`) AS decimal(38,0)) as medel
+                        $incomesql = "SELECT SUM(`Kostnad`) as summa, CAST(avg(`Kostnad`) AS decimal(38,0)) as medel, COUNT(*) AS antal
                         FROM hyr WHERE indatum BETWEEN '$start' AND '$stop'";
                         $res = mysqli_query($conn, $incomesql);
-                        print_r($res);
-                        
+                        $kostander = mysqli_fetch_assoc($res);
+                        if($kostander){
+                            echo '<tr>
+                                    <td>'.$kostander['summa'].'</td>
+                                    <td>'.$kostander['medel'].'</td>
+                                    <td>'.$kostander['antal'].'</td>
+                                </tr>';
+                        }
                     }
                     ?>
                 </tbody>
@@ -56,7 +62,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    <?php
+                    if(isset($_POST['search'])){
+                        // SELECT Regnr, SUM(`Kostnad`) as summa, CAST(avg(`Kostnad`) AS decimal(38,0)) as medel, COUNT(*) AS antal FROM hyr WHERE indatum BETWEEN '2021-12-01' AND '2021-12-30' GROUP BY `Regnr`
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>

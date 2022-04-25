@@ -8,8 +8,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin</title>
+    <title>ekonom</title>
     <link rel="stylesheet" href="../style.css">
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 <body>
     <section>
@@ -64,12 +65,67 @@
                 <tbody>
                     <?php
                     if(isset($_POST['search'])){
-                        // SELECT Regnr, SUM(`Kostnad`) as summa, CAST(avg(`Kostnad`) AS decimal(38,0)) as medel, COUNT(*) AS antal FROM hyr WHERE indatum BETWEEN '2021-12-01' AND '2021-12-30' GROUP BY `Regnr`
+                        $start = $_POST['start'];
+                        $stop = $_POST['stop'];
+                        $costsArr = array();
+                        $everyCar = "SELECT Regnr, SUM(`Kostnad`) as summa, CAST(avg(`Kostnad`) AS decimal(38,0)) as medel, COUNT(*) AS antal FROM hyr WHERE indatum BETWEEN '$start' AND '$stop' GROUP BY `Regnr`";
+                        $result = mysqli_query($conn, $everyCar);
+                        while($cost = mysqli_fetch_assoc($result)){
+                            // $costsArr[] = $cost['summa'];
+                            $costsArr[] = array('reg'=>$cost['Regnr'], 'sum'=>$cost['summa']);
+                            echo '<tr>
+                                    <td>'.$cost['Regnr'].'</td>
+                                    <td>'.$cost['summa'].'</td>
+                                    <td>'.$cost['medel'].'</td>
+                                    <td>'.$cost['antal'].'</td>
+                                </tr>';
+                        }
                     }
                     ?>
                 </tbody>
             </table>
         </div>
+
+        <?php
+        if(isset($_POST['search'])){
+            $dataPoints = array();
+            $x_axis = 0;
+            foreach($costsArr as $costArr){
+                $x_axis += 10;
+                // $dataPoints[] = array("x"=> $x_axis, "y"=> $costArr);
+                $dataPoints[] = array("x"=> $x_axis, "y"=> $costArr['sum'], "indexLabel"=> $costArr['reg']);
+            }
+            // print_r($dataPoints);
+        ?>
+        <script>
+        window.onload = function () {
+        
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            exportEnabled: true,
+            theme: "light1", // "light1", "light2", "dark1", "dark2"
+            title:{
+                text: "Statistic of your cars"
+            },
+            axisY:{
+                includeZero: true
+            },
+            data: [{
+                type: "column", //change type to bar, line, area, pie, etc
+                //indexLabel: "{y}", //Shows y value on all Data Points
+                indexLabelFontColor: "#5A5757",
+                indexLabelPlacement: "outside",   
+                dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+            }]
+        });
+        chart.render();
+        
+        }
+        </script>
+        <div id="chartContainer" style="height: 470px; width: 100%; margin-top:4rem;"></div>
+        <?php
+            }
+        ?>
     </section>
 </body>
 </html>
